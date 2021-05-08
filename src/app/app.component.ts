@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,10 +7,14 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Todo-App-NgrxComponent-store';
+  title = 'Todo App';
   public todoName = '';
+  public todoForm: FormControl = new FormControl([''], [Validators.minLength(5)]);
 
-  public onSubmit(todo: string): void {
-    this.todoName = todo;
+  public onSubmit(): void {
+    if (this.todoForm.valid) {
+      this.todoName = this.todoForm.value;
+      this.todoForm.reset();
+    }
   }
 }
