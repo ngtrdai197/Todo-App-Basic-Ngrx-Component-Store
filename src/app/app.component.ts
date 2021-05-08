@@ -14,7 +14,11 @@ export class AppComponent {
   public onSubmit(): void {
     if (this.todoForm.valid) {
       this.todoName = this.todoForm.value;
-      this.todoForm.reset();
+      if (this.todoName.trim().length < 5) {
+        this.todoForm.setErrors({invalidWhiteSpace: true});
+      } else {
+        this.todoForm.reset();
+      }
     }
   }
 }
